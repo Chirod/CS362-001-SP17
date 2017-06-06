@@ -49,34 +49,36 @@ public class UrlValidatorTest extends TestCase {
 		"someJunk//",
 		"someTrash:/"
    };
-   private String[] athorityValid = {
+   private String[] authorityValid = {
 	   "www.google.com",
 	   "1.1.1.1",
-	   "192.168.1.1"
+	   "192.168.1.1",
+	   "0.0.0.0",
+	   "255.255.255.254",
+	   "255.255.255.255"
    };
    
-   private String[] athorityInValid = {
-	   "google.com",
-	   "ww.google.com",
-	   "0.0.0",
-	   "128.4.5",
+   private String[] authorityInValid = {	  
 	   "128.192.134.156.172",
-	   "256.256.256.256",
-	   "www.yourmom.com"
+	   "256.256.256.256"
    };
    private String[] portValid = {
-	   "60000",
-	   "1",
-	   "29000",
-	   "65535"
+	   ":60000",
+	   ":1",
+	   ":29000",
+	   ":65535",
+	   ":100",
+	   ":1000",
+	   ":1234"//largest valid port number.
    };
    
    private String[] portInValid = {
-	   "0",
-	   "-100",
-	   "-1",
-	   "12345678910",
-	   "65536" //largest 16 bit port number.
+	   ":0",
+	   ":-100",
+	   ":-1",
+	   ":12345678910",
+	   ":65536",
+		"55"
    };
    private String[] Query;
    private String[] path;
@@ -107,13 +109,24 @@ public class UrlValidatorTest extends TestCase {
    
    
    //thomas
-   public void testPort(){
-
+   public void testPort() throws Exception {
 //	   System.out.println(urlVal.isValid("http://www.am%30azon.com"));
 //	   System.out.println(urlVal.isValid("http://name:pass@www.pc-help.org/obscure.htm"));
 	   
+	   for(int i = 0; i < portValid.length; i++){
+		   testUrl(true, assembleURL( "http://", "www.google.com", portValid[i], null, null));
+	   }	   
+	   
+	   for(int i = 0; i < portInValid.length; i++){
+		   testUrl(false, assembleURL( "http://", "www.google.com", portInValid[i], null, null));
+	   }
+	   
+	   
+	   
+	   
+	   
+	   
    }
-   
    //Christopher - do scheme, path
    private String assembleURL(String scheme, String authority, String port, String path, String query) {
 	   return (scheme == null ? "" : scheme) + 
@@ -123,10 +136,16 @@ public class UrlValidatorTest extends TestCase {
 			   (query == null ? "" : query);
    }
    
+   //thomas
+   public void testQuery(){
+	   
+   }
+   
 
    private void testUrl(boolean shouldBeValid, String url) throws Exception {
 	   UrlValidator urlVal = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);
 	   assertEquals(shouldBeValid, urlVal.isValid(url));
+	   System.out.println("This URL passed: " + url);
    }
    
    public void testScheme() throws Exception
@@ -168,13 +187,16 @@ public class UrlValidatorTest extends TestCase {
    }
    
    public void testAuthority() throws Exception {
-	   testUrl(true, assembleURL("http://","username.password@www.amazon.com", null, null, null));
+	    //testUrl(true, assembleURL("http://","username.password@www.amazon.com", null, null, null));
+		for(int i = 0; i < authorityValid.length; i++){
+			testUrl(true, assembleURL("http://", authorityValid[i], null, null, null));
+		}
+		for(int i = 0; i < authorityInValid.length; i++){
+			testUrl(false , assembleURL("http://", authorityInValid[i], null, null, null));
+		}
    }
    
 
-   public void testQuery() {
-	   
-   }
 
    
    public void testPath() throws Exception {
