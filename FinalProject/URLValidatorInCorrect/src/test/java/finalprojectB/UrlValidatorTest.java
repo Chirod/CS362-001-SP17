@@ -107,8 +107,16 @@ public class UrlValidatorTest extends TestCase {
    
    
    //thomas
-   public void testPort(){
-
+   public void testPort() throws Exception{
+	   testUrl(true, assembleURL("http://","www.amazon.com", ":1", null, null));
+	   testUrl(true, assembleURL("http://","www.amazon.com", ":12", null, null));
+	   testUrl(true, assembleURL("http://","www.amazon.com", ":123", null, null));
+	   testUrl(true, assembleURL("http://","www.amazon.com", ":1235", null, null));
+	   testUrl(true, assembleURL("http://","www.amazon.com", ":1235", null, null));
+	   testUrl(true, assembleURL("http://","www.amazon.com", ":12356", null, null));
+	   testUrl(true, assembleURL("http://","www.amazon.com", ":65535", null, null));
+	   testUrl(false, assembleURL("http://","www.amazon.com", ":65536", null, null));
+	   testUrl(false, assembleURL("http://","www.amazon.com", ":462424", null, null));
 //	   System.out.println(urlVal.isValid("http://www.am%30azon.com"));
 //	   System.out.println(urlVal.isValid("http://name:pass@www.pc-help.org/obscure.htm"));
 	   
