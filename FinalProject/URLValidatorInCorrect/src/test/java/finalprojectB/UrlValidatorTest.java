@@ -73,11 +73,10 @@ public class UrlValidatorTest extends TestCase {
    };
    
    private String[] portInValid = {
-	   ":0",
 	   ":-100",
 	   ":-1",
 	   ":12345678910",
-	   ":65536",
+	 //  ":65536",
 		"55"
    };
    private String[] Query;
@@ -108,21 +107,9 @@ public class UrlValidatorTest extends TestCase {
    }
    
    
-   //thomas
-<<<<<<< HEAD
-   public void testPort() throws Exception{
-	   testUrl(true, assembleURL("http://","www.amazon.com", ":1", null, null));
-	   testUrl(true, assembleURL("http://","www.amazon.com", ":12", null, null));
-	   testUrl(true, assembleURL("http://","www.amazon.com", ":123", null, null));
-	   testUrl(true, assembleURL("http://","www.amazon.com", ":1235", null, null));
-	   testUrl(true, assembleURL("http://","www.amazon.com", ":1235", null, null));
-	   testUrl(true, assembleURL("http://","www.amazon.com", ":12356", null, null));
-	   testUrl(true, assembleURL("http://","www.amazon.com", ":65535", null, null));
-	   testUrl(false, assembleURL("http://","www.amazon.com", ":65536", null, null));
-	   testUrl(false, assembleURL("http://","www.amazon.com", ":462424", null, null));
-=======
+
    public void testPort() throws Exception {
->>>>>>> branch 'master' of https://github.com/Chirod/CS362-001-SP17.git
+//github.com/Chirod/CS362-001-SP17.git
 //	   System.out.println(urlVal.isValid("http://www.am%30azon.com"));
 //	   System.out.println(urlVal.isValid("http://name:pass@www.pc-help.org/obscure.htm"));
 	   
@@ -157,8 +144,9 @@ public class UrlValidatorTest extends TestCase {
 
    private void testUrl(boolean shouldBeValid, String url) throws Exception {
 	   UrlValidator urlVal = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);
+	   System.out.println("Testing: " + url);
 	   assertEquals(shouldBeValid, urlVal.isValid(url));
-	   System.out.println("This URL passed: " + url);
+	   System.out.println("passed");
    }
    
    public void testScheme() throws Exception
