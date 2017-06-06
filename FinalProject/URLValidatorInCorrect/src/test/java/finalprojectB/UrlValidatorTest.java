@@ -88,7 +88,6 @@ public class UrlValidatorTest extends TestCase {
    public void testManualTest()
    {
 	   UrlValidator urlVal = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);
-<<<<<<< HEAD
 	   System.out.println(urlVal.isValid("http://www.amazon.com"));
 	   System.out.println(urlVal.isValid("www.amazon.damn?dude=five"));
 	   System.out.println(urlVal.isValid("ssh://www.osu.org/../"));
@@ -106,20 +105,15 @@ public class UrlValidatorTest extends TestCase {
 	   System.out.println(urlVal.isValid("http://www.google.com:100000000000000/index"));
    }
    
-   //chris
-   public void testScheme()
-   {
-	   
-   }
    
    //thomas
    public void testPort(){
-=======
+
 //	   System.out.println(urlVal.isValid("http://www.am%30azon.com"));
 //	   System.out.println(urlVal.isValid("http://name:pass@www.pc-help.org/obscure.htm"));
->>>>>>> b103b6d899b0d0a9a325d7a77ca593cc3349a612
 	   
    }
+   
    //Christopher - do scheme, path
    private String assembleURL(String scheme, String authority, String port, String path, String query) {
 	   return (scheme == null ? "" : scheme) + 
@@ -129,15 +123,7 @@ public class UrlValidatorTest extends TestCase {
 			   (query == null ? "" : query);
    }
    
-<<<<<<< HEAD
-   //thomas
-   public void testQuery(){
-	   
-   }
-   
-   //thomas
-   public void testAuthority(){
-=======
+
    private void testUrl(boolean shouldBeValid, String url) throws Exception {
 	   UrlValidator urlVal = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);
 	   assertEquals(shouldBeValid, urlVal.isValid(url));
@@ -153,7 +139,6 @@ public class UrlValidatorTest extends TestCase {
 	   testUrl(true, assembleURL("b234qh43://","www.amazon.com", null, null, null));
 	   testUrl(true, assembleURL("A://","www.amazon.com", null, null, null));
 	   testUrl(true, assembleURL("coolstuff://","www.amazon.com", null, null, null));
->>>>>>> b103b6d899b0d0a9a325d7a77ca593cc3349a612
 	   
 	   //start with usually legal, but non-alpha char
 	   testUrl(false, assembleURL("1moretime://","www.amazon.com", null, null, null));
@@ -186,18 +171,11 @@ public class UrlValidatorTest extends TestCase {
 	   testUrl(true, assembleURL("http://","username.password@www.amazon.com", null, null, null));
    }
    
-<<<<<<< HEAD
-   //chris:
-   public void testPath() {
-=======
+
    public void testQuery() {
 	   
    }
 
-   public void testPart() {
->>>>>>> b103b6d899b0d0a9a325d7a77ca593cc3349a612
-	   
-   }
    
    public void testPath() throws Exception {
 	   testUrl(true, "http://www.amazon.com");
