@@ -59,8 +59,9 @@ public class UrlValidatorTest extends TestCase {
    };
    
    private String[] authorityInValid = {	  
-	   "128.192.134.156.172",
-	   "256.256.256.256"
+		   "128.192.134.156.172",
+		   "google",
+		   "256.256.256.256"
    };
    private String[] portValid = {
 	   ":60000",
@@ -69,7 +70,7 @@ public class UrlValidatorTest extends TestCase {
 	   ":65535",
 	   ":100",
 	   ":1000",
-	   ":1234"//largest valid port number.
+	   ":1234"
    };
    
    private String[] portInValid = {
@@ -79,7 +80,17 @@ public class UrlValidatorTest extends TestCase {
 	 //  ":65536",
 		"55"
    };
-   private String[] Query;
+   private String[] queryValid = {
+		   "?name=bob",
+		   "?name=tom&gpa=3.6",
+		   "?username=tnoelckt&passwored=bob",
+		   "?q=1;b=2;c=3"
+   };
+
+   private String[] queryInValid = {
+   			"bob=bob",
+		   	"&l=uv"
+	};
    private String[] path;
 
    public UrlValidatorTest(String testName) {
@@ -137,8 +148,14 @@ public class UrlValidatorTest extends TestCase {
    }
    
    //thomas
-   public void testQuery(){
-	   
+   public void testQuery() throws Exception {
+	   for(int i = 0; i < queryValid.length; i++){
+	   		testUrl(true, assembleURL("http://", "www.google.com", null, null, queryValid[i]));
+	   }
+
+	   for(int i = 0; i < queryInValid.length; i++){
+	   		testUrl(false, assembleURL("http://", "www.google.com", null, null, queryInValid[i]));
+	   }
    }
    
 
