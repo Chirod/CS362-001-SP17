@@ -200,7 +200,9 @@ public class DomainValidator implements Serializable {
      * @return true if the parameter is an local TLD
      */
     public boolean isValidLocalTld(String iTld) {
-        
+        //this looks suspicions!!! basically if the top level domain is in the list
+        //we are returning the opposit of what we should be.
+        // THOMAS NOELCKE: TESTER
     	return !LOCAL_TLD_LIST.contains(chompLeadingDot(iTld.toLowerCase()));
     }
 

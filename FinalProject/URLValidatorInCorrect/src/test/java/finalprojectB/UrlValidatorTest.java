@@ -101,7 +101,8 @@ public class UrlValidatorTest extends TestCase {
    {
 	   UrlValidator urlVal = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);
 	   System.out.println(urlVal.isValid("http://www.amazon.com"));
-	   System.out.println(urlVal.isValid("www.amazon.damn?dude=five"));
+	   System.out.println(urlVal.isValid("http://www.amazon.com?dude=five"));
+	   System.out.println(urlVal.isValid("http://www.amazon.com"));
 	   System.out.println(urlVal.isValid("ssh://www.osu.org/../"));
 	   System.out.println(urlVal.isValid("http:/www.google/dudeman:35844"));
 	   System.out.println(urlVal.isValid("http://192.168.1.1"));
@@ -115,6 +116,7 @@ public class UrlValidatorTest extends TestCase {
 	   System.out.println(urlVal.isValid("http://www.google.com:80/index"));
 	   System.out.println(urlVal.isValid("http://www.google.com:80b/index"));
 	   System.out.println(urlVal.isValid("http://www.google.com:100000000000000/index"));
+	   System.out.println(urlVal.isValid("http://localhost:123"));
    }
    
    
